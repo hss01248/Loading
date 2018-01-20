@@ -3,7 +3,7 @@
     <declare-styleable name="CircleLoadingView">
         <attr name="startColor" format="color" />
         <attr name="endColor" format="color" />
-        <attr name="circleThickness" format="dimension" />
+        <attr name="circleThicknessRatio" format="float" />
     </declare-styleable>
     <declare-styleable name="ThreeBodyLoadingView">
         <attr name="firstColor" format="color" />

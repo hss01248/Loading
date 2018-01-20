@@ -9,7 +9,6 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -49,7 +48,7 @@ public class CircleLoadingView extends View {
     /**
      * 圆环厚度f
      */
-    private int circleThickness;
+    private float circleThicknessRatio;
     /**
      * 属性东环改变的属性，0.0~1.0
      */
@@ -65,25 +64,25 @@ public class CircleLoadingView extends View {
         init(context, null);
     }
 
-    public CircleLoadingView(Context context, @Nullable AttributeSet attrs) {
+    public CircleLoadingView(Context context,  AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
-    public CircleLoadingView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public CircleLoadingView(Context context,  AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
     private void init(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CircleLoadingView);
-        startColor = typedArray.getColor(R.styleable.CircleLoadingView_startColor, 0xFFFFFFFF);
+        startColor = typedArray.getColor(R.styleable.CircleLoadingView_startColor, 0x88666666);
         endColor = typedArray.getColor(R.styleable.CircleLoadingView_endColor, 0x00000000);
-        circleThickness = (int) typedArray.getDimension(R.styleable.CircleLoadingView_circleThickness, dip2px(10));
+        circleThicknessRatio = (float) typedArray.getDimension(R.styleable.CircleLoadingView_circleThicknessRatio, 0.1f);
         typedArray.recycle();
         paint = new Paint();
         paint.setAntiAlias(true);
-        paint.setStrokeWidth(circleThickness);
+        //paint.setStrokeWidth(circleThicknessRatio);
         paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStyle(Paint.Style.STROKE);
 
@@ -120,6 +119,10 @@ public class CircleLoadingView extends View {
             rect.top = (height - width) / 2;
             rect.bottom = height - rect.top;
         }
+
+       int  circleThickness = (int) (width*circleThicknessRatio);
+        paint.setStrokeWidth(circleThickness);
+
         rect.left = rect.left + circleThickness / 2;
         rect.right = rect.right - circleThickness / 2;
         rect.top = rect.top + circleThickness / 2;
@@ -158,12 +161,12 @@ public class CircleLoadingView extends View {
         refresh();
     }
 
-    public int getCircleThickness() {
-        return circleThickness;
+    public float getCircleThicknessRatio() {
+        return circleThicknessRatio;
     }
 
-    public void setCircleThickness(int circleThickness) {
-        this.circleThickness = circleThickness;
+    public void setCircleThicknessRatio(float circleThicknessRatio) {
+        this.circleThicknessRatio = circleThicknessRatio;
     }
 
     private void animStart() {

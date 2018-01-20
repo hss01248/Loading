@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -47,12 +46,12 @@ public class ThreeBodyLoadingView extends View {
         init(null);
     }
 
-    public ThreeBodyLoadingView(Context context, @Nullable AttributeSet attrs) {
+    public ThreeBodyLoadingView(Context context,  AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
     }
 
-    public ThreeBodyLoadingView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ThreeBodyLoadingView(Context context,  AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }
